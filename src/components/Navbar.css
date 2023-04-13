@@ -1,0 +1,108 @@
+:root {
+	--mainColor: #29335c;
+	--mainColorLight: #5767aa;
+	--secondaryColor: #db2b39;
+	--textColor: #eee;
+}
+
+.navbarContainer {
+	position: -webkit-sticky; /* Safari */
+  	position: sticky;
+  	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 80px;
+	padding: 0 2rem;
+	background-color: var(--mainColor);
+	color: var(--textColor);
+}
+
+#navLogo{
+	transform: translateX(-48px);
+}
+
+#navLogo > img{
+	width: 27px;  
+}
+
+nav a {
+	margin: 0 1rem;
+	color: var(--textColor);
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: var(--secondaryColor);
+}
+
+.navBtn {
+	padding: 5px;
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--textColor);
+	font-size: 1.8rem;
+}
+
+#navOpenBtn,  #navCloseBtn{
+	padding: 5px;
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--textColor);
+	visibility: hidden;
+	opacity: 0;
+	font-size: 1.8rem;
+}
+
+.navbarContainer div,
+nav {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+	#navLogo{
+		transform: translateX(0);
+	}
+
+	#navOpenBtn {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.navbarContainer nav {
+		position: fixed;
+		top: 0;
+		left: -100vw;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--mainColor);
+		transition: 1s;
+	}
+
+	.navbarContainer .responsive_nav {
+		transform: translateX(100vw);
+	}
+
+	#navCloseBtn {
+		visibility: visible;
+		opacity: 1;
+		position: absolute;
+		top: 2rem;
+		left: 2rem;
+	}
+
+	nav a {
+		font-size: 1.5rem;
+	}
+}
