@@ -2,12 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar.jsx";
 
 const Home = () => {
-  return (
-    <div>
-      <Navbar />
-      Main page
-    </div>
-  );
+  return <div>Main page</div>;
 };
 
 export default Home;

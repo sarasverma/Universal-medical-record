@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./Auth.css";
+// import "./Auth.css";
 import Logo from "../assets/logo.png";
 import { auth, db } from "../firebase";
 import {
@@ -10,6 +10,8 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../components/Carousel";
+import { toast } from "react-toastify";
+import Wrapper from "./AuthStyle";
 
 const Auth = () => {
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
@@ -47,10 +49,12 @@ const Auth = () => {
 
     const { email, password } = loginInfo;
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+
+      toast.success(`Welcome back ${user.displayName}`);
       navigate("/");
     } catch (e) {
-      console.error(e);
+      toast.error(`Error authenticating user: ${e}`);
     }
   };
 
@@ -76,150 +80,153 @@ const Auth = () => {
         email,
       });
 
+      toast.success(`Welcome ${user.displayName}`);
       navigate("/");
     } catch (e) {
-      console.error(e);
+      toast.error(`Error : ${e}`);
     }
   };
 
   return (
-    <main ref={toogleRef}>
-      <div className="box">
-        <div className="inner-box">
-          <div className="forms-wrap">
-            {/* Login */}
-            <form
-              onSubmit={handleLogin}
-              autoComplete="off"
-              className="sign-in-form"
-            >
-              <div className="logo">
-                <img src={Logo} alt="Universal Medical Record" />
-                <h4>Universal Medical Record</h4>
-              </div>
-              <div className="heading">
-                <h2>Welcome</h2>
-                <h6>Not registred yet?</h6>
-                <a href="#" className="toggle" onClick={handleToggleAuth}>
-                  Sign up
-                </a>
-              </div>
-              <div className="actual-form">
-                <div className="input-wrap">
-                  <input
-                    type="email"
-                    name="email"
-                    onChange={onChangeLogin}
-                    className="input-field"
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    autoComplete="off"
-                    required
-                  />
-                  <label>Email</label>
+    <Wrapper>
+      <main ref={toogleRef}>
+        <div className="box">
+          <div className="inner-box">
+            <div className="forms-wrap">
+              {/* Login */}
+              <form
+                onSubmit={handleLogin}
+                autoComplete="off"
+                className="sign-in-form"
+              >
+                <div className="logo">
+                  <img src={Logo} alt="Universal Medical Record" />
+                  <h4>Universal Medical Record</h4>
                 </div>
-                <div className="input-wrap">
-                  <input
-                    type="password"
-                    minLength={4}
-                    name="password"
-                    onChange={onChangeLogin}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    className="input-field"
-                    autoComplete="off"
-                    required
-                  />
-                  <label>Password</label>
+                <div className="heading">
+                  <h2>Welcome</h2>
+                  <h6>Not registred yet?</h6>
+                  <a href="#" className="toggle" onClick={handleToggleAuth}>
+                    Sign up
+                  </a>
                 </div>
-                <input
-                  type="submit"
-                  defaultValue="Sign In"
-                  className="sign-btn"
-                />
-                <p className="text">
-                  Forgotten your password or you login datails?
-                  <a href="#">Get help</a> signing in
-                </p>
-              </div>
-            </form>
+                <div className="actual-form">
+                  <div className="input-wrap">
+                    <input
+                      type="email"
+                      name="email"
+                      onChange={onChangeLogin}
+                      className="input-field"
+                      onFocus={handleOnFocus}
+                      onBlur={handleOnBlur}
+                      autoComplete="off"
+                      required
+                    />
+                    <label>Email</label>
+                  </div>
+                  <div className="input-wrap">
+                    <input
+                      type="password"
+                      minLength={4}
+                      name="password"
+                      onChange={onChangeLogin}
+                      onFocus={handleOnFocus}
+                      onBlur={handleOnBlur}
+                      className="input-field"
+                      autoComplete="off"
+                      required
+                    />
+                    <label>Password</label>
+                  </div>
+                  <input
+                    type="submit"
+                    defaultValue="Sign In"
+                    className="sign-btn"
+                  />
+                  <p className="text">
+                    Forgotten your password or you login datails?
+                    <a href="#">Get help</a> signing in
+                  </p>
+                </div>
+              </form>
 
-            {/* Register */}
-            <form
-              onSubmit={handleRegister}
-              autoComplete="off"
-              className="sign-up-form"
-            >
-              <div className="logo">
-                <img src={Logo} alt="Universal Medical Record" />
-                <h4>Universal Medical Record</h4>
-              </div>
-              <div className="heading">
-                <h2>Get Started</h2>
-                <h6>Already have an account?</h6>
-                <a href="#" className="toggle" onClick={handleToggleAuth}>
-                  Sign in
-                </a>
-              </div>
-              <div className="actual-form">
-                <div className="input-wrap">
-                  <input
-                    type="text"
-                    minLength={3}
-                    name="name"
-                    onChange={onChangeRegister}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    className="input-field"
-                    autoComplete="off"
-                    required
-                  />
-                  <label>Name</label>
+              {/* Register */}
+              <form
+                onSubmit={handleRegister}
+                autoComplete="off"
+                className="sign-up-form"
+              >
+                <div className="logo">
+                  <img src={Logo} alt="Universal Medical Record" />
+                  <h4>Universal Medical Record</h4>
                 </div>
-                <div className="input-wrap">
-                  <input
-                    type="email"
-                    name="email"
-                    onChange={onChangeRegister}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    className="input-field"
-                    autoComplete="off"
-                    required
-                  />
-                  <label>Email</label>
+                <div className="heading">
+                  <h2>Get Started</h2>
+                  <h6>Already have an account?</h6>
+                  <a href="#" className="toggle" onClick={handleToggleAuth}>
+                    Sign in
+                  </a>
                 </div>
-                <div className="input-wrap">
+                <div className="actual-form">
+                  <div className="input-wrap">
+                    <input
+                      type="text"
+                      minLength={3}
+                      name="name"
+                      onChange={onChangeRegister}
+                      onFocus={handleOnFocus}
+                      onBlur={handleOnBlur}
+                      className="input-field"
+                      autoComplete="off"
+                      required
+                    />
+                    <label>Name</label>
+                  </div>
+                  <div className="input-wrap">
+                    <input
+                      type="email"
+                      name="email"
+                      onChange={onChangeRegister}
+                      onFocus={handleOnFocus}
+                      onBlur={handleOnBlur}
+                      className="input-field"
+                      autoComplete="off"
+                      required
+                    />
+                    <label>Email</label>
+                  </div>
+                  <div className="input-wrap">
+                    <input
+                      type="password"
+                      minLength={4}
+                      name="password"
+                      onChange={onChangeRegister}
+                      onFocus={handleOnFocus}
+                      onBlur={handleOnBlur}
+                      className="input-field"
+                      autoComplete="off"
+                      required
+                    />
+                    <label>Password</label>
+                  </div>
                   <input
-                    type="password"
-                    minLength={4}
-                    name="password"
-                    onChange={onChangeRegister}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    className="input-field"
-                    autoComplete="off"
-                    required
+                    type="submit"
+                    defaultValue="Sign Up"
+                    className="sign-btn"
                   />
-                  <label>Password</label>
+                  <p className="text">
+                    By signing up, I agree to the
+                    <a href="#">Terms of Services</a> and
+                    <a href="#">Privacy Policy</a>
+                  </p>
                 </div>
-                <input
-                  type="submit"
-                  defaultValue="Sign Up"
-                  className="sign-btn"
-                />
-                <p className="text">
-                  By signing up, I agree to the
-                  <a href="#">Terms of Services</a> and
-                  <a href="#">Privacy Policy</a>
-                </p>
-              </div>
-            </form>
+              </form>
+            </div>
+            <Carousel />
           </div>
-          <Carousel />
         </div>
-      </div>
-    </main>
+      </main>
+    </Wrapper>
   );
 };
 

@@ -5,6 +5,7 @@ import { RiNotification4Fill } from "react-icons/ri";
 import Logo from "../assets/logo.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const navRef = useRef();
@@ -24,10 +25,10 @@ function Navbar() {
         </div>
       </div>
       <nav ref={navRef}>
-        <a href="/#">Home</a>
-        <a href="/#">Service</a>
-        <a href="/#">Account</a>
-        <a href="/#">Setting</a>
+        <Link to="/home">Home</Link>
+        <Link to="/new">New</Link>
+        <Link to="/account">Account</Link>
+        <Link to="/setting">Setting</Link>
         <button id="navCloseBtn" onClick={showNavbar}>
           <FaTimes />
         </button>
