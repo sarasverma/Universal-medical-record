@@ -11,6 +11,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import New from "./pages/New";
+import Search from "./components/Search";
+import Notification from "./pages/Notification";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -53,7 +55,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute>
+                <Notification />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/test" element={<Test />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>
 

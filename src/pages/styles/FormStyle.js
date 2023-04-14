@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
+  margin-top: 10px;
+
   .container {
     position: relative;
     max-width: 900px;
@@ -120,6 +122,19 @@ const Wrapper = styled.div`
 
   .gend {
     height: 42px;
+  }
+
+  @media (max-width: 530px) {
+    flex-direction: column;
+    align-items: center;
+
+    form .fields .input-field {
+      flex-direction: column;
+      width: 100%;
+    }
+    .container form button {
+      max-width: 100%;
+    }
   }
 `;
 

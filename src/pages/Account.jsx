@@ -1,12 +1,89 @@
-import React from "react";
-import Wrapper from "./FormStyle";
+import React, { useState } from "react";
+import Wrapper from "./styles/FormStyle";
+import { FaUserAlt } from "react-icons/fa";
+import UserInfo from "../components/UserInfo";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Account = () => {
+  const [formData, setFormData] = useState({
+    dob: "",
+    role: "patient",
+    gender: "male",
+    weight: "",
+    height: "",
+    bloodGroup: "",
+    mobileNo: "",
+    occupation: "",
+    address: "",
+  });
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await getDoc(doc(db, "userInfo", currentUser.email));
+        if (res.exists()) {
+          const data = res.data();
+          setFormData({ ...formData, ...data });
+          // console.log(data);
+          // console.log(formData);
+        }
+      } catch (e) {
+        toast.error(e);
+      }
+    }
+    getData();
+  }, []);
+
+  const handleOnChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const {
+      dob,
+      role,
+      gender,
+      weight,
+      height,
+      bloodGroup,
+      mobileNo,
+      occupation,
+      address,
+    } = formData;
+    try {
+      await updateDoc(doc(db, "userInfo", currentUser.email), {
+        dob,
+        role,
+        gender,
+        weight,
+        height,
+        bloodGroup,
+        mobileNo,
+        occupation,
+        address,
+      });
+      toast.success("Information updated successfully");
+    } catch (e) {
+      toast.error(`Error : ${e}`);
+    }
+  };
+
   return (
     <Wrapper>
+      <UserInfo />
       <div className="container">
-        <header>Your information</header>
-        <form>
+        <header>
+          Your information <FaUserAlt />
+        </header>
+        <form onSubmit={handleSubmit}>
           <div className="form first">
             <div className="details personal">
               <span className="" title="">
@@ -14,59 +91,84 @@ const Account = () => {
               </span>
               <div className="fields">
                 <div className="input-field">
-                  <label>Fulle Name</label>
-                  <input
-                    type="text"
-                    placeholder="Enter your name"
-                    required=""
-                  />
-                </div>
-                <div className="input-field">
                   <label>Date of Birth</label>
                   <input
                     type="date"
                     placeholder="Enter birth date"
-                    required=""
+                    name="dob"
+                    value={formData.dob}
+                    onChange={handleOnChange}
+                    required
                   />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="gender">Select your gender</label>
-                  <select className="gend" name="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">other</option>
+                  <label htmlFor="role">Select your role</label>
+                  <select
+                    className="gend"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleOnChange}
+                  >
+                    <option value="patient">patient</option>
+                    <option value="doctor">doctor</option>
                   </select>
                 </div>
                 <div className="input-field">
-                  <label>Email</label>
-                  <input
-                    type="text"
-                    placeholder="Enter your email"
-                    required=""
-                  />
-                </div>
-                <div className="input-field">
-                  <label>Mobile Number</label>
-                  <input
-                    type="number"
-                    placeholder="Enter your mobile number"
-                    required=""
-                  />
+                  <label htmlFor="gender">Select your gender</label>
+                  <select
+                    className="gend"
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleOnChange}
+                  >
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                    <option value="other">others</option>
+                  </select>
                 </div>
                 <div className="input-field">
                   <label>Weight</label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="Enter your weight"
-                    required=""
+                    name="weight"
+                    value={formData.weight}
+                    onChange={handleOnChange}
+                    required
                   />
                 </div>
                 <div className="input-field">
                   <label>Height</label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="Enter your height"
-                    required=""
+                    name="height"
+                    value={formData.height}
+                    onChange={handleOnChange}
+                    required
+                  />
+                </div>
+                <div className="input-field">
+                  <label>Blood group</label>
+                  <input
+                    type="text"
+                    placeholder="Enter your Blood group"
+                    name="bloodGroup"
+                    value={formData.bloodGroup}
+                    onChange={handleOnChange}
+                    required
+                  />
+                </div>
+                <div className="input-field">
+                  <label>Mobile Number</label>
+                  <input
+                    type="text"
+                    minLength={10}
+                    placeholder="Enter your mobile number"
+                    name="mobileNo"
+                    value={formData.mobileNo}
+                    onChange={handleOnChange}
+                    required
                   />
                 </div>
                 <div className="input-field">
@@ -74,7 +176,10 @@ const Account = () => {
                   <input
                     type="text"
                     placeholder="Enter your occupation"
-                    required=""
+                    name="occupation"
+                    value={formData.occupation}
+                    onChange={handleOnChange}
+                    required
                   />
                 </div>
                 <div className="input-field">
@@ -82,13 +187,16 @@ const Account = () => {
                   <input
                     type="text"
                     placeholder="Enter your Address"
-                    required=""
+                    name="address"
+                    value={formData.address}
+                    onChange={handleOnChange}
+                    required
                   />
                 </div>
               </div>
             </div>
             <button className="nextbtn" type="submit">
-              <span className="btnText">Submit</span>
+              <span className="btnText">Change</span>
             </button>
           </div>
         </form>

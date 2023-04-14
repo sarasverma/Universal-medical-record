@@ -27,13 +27,13 @@
 	width: 27px;  
 }
 
-nav a {
+nav a, .navBtn a {
 	margin: 0 1rem;
 	color: var(--textColor);
 	text-decoration: none;
 }
 
-nav a:hover {
+nav a:hover, .navBtn:hover, .navBtn a:hover  {
 	color: var(--secondaryColor);
 }
 

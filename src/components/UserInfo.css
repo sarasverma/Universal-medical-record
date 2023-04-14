@@ -1,0 +1,18 @@
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .userInfo > img{
+    width: 256px;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1;
+  }
+  
+  @media (max-width: 530px) {
+    .userInfo > img{
+      width: 100px;
+    }
+  }

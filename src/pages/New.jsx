@@ -1,11 +1,14 @@
 import React from "react";
-import Wrapper from "./FormStyle";
+import Wrapper from "./styles/FormStyle";
+import { AiFillFileAdd } from "react-icons/ai";
 
 const New = () => {
   return (
     <Wrapper>
       <div className="container">
-        <header>Patient Details</header>
+        <header>
+          New Details <AiFillFileAdd />
+        </header>
         <form>
           <div className="form first">
             <div className="details Disease">

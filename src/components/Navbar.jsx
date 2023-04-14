@@ -6,18 +6,29 @@ import Logo from "../assets/logo.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Navbar() {
   const navRef = useRef();
 
-  const showNavbar = () => {
-    navRef.current.classList.toggle("responsive_nav");
+  const openNavbar = () => {
+    if (!navRef.current.classList.contains("responsive_nav"))
+      navRef.current.classList.add("responsive_nav");
+  };
+  const closeNavbar = () => {
+    if (navRef.current.classList.contains("responsive_nav"))
+      navRef.current.classList.remove("responsive_nav");
+  };
+
+  const handleSignOut = () => {
+    signOut(auth);
+    toast.success("Logout successfully !");
   };
 
   return (
     <div className="navbarContainer">
       <div>
-        <button id="navOpenBtn" onClick={showNavbar}>
+        <button id="navOpenBtn" onClick={openNavbar}>
           <FaBars />
         </button>
         <div id="navLogo">
@@ -25,19 +36,29 @@ function Navbar() {
         </div>
       </div>
       <nav ref={navRef}>
-        <Link to="/home">Home</Link>
-        <Link to="/new">New</Link>
-        <Link to="/account">Account</Link>
-        <Link to="/setting">Setting</Link>
-        <button id="navCloseBtn" onClick={showNavbar}>
+        <Link to="/" onClick={closeNavbar}>
+          Home
+        </Link>
+        <Link to="/new" onClick={closeNavbar}>
+          New
+        </Link>
+        <Link to="/account" onClick={closeNavbar}>
+          Account
+        </Link>
+        <Link to="/setting" onClick={closeNavbar}>
+          Setting
+        </Link>
+        <button id="navCloseBtn" onClick={closeNavbar}>
           <FaTimes />
         </button>
       </nav>
       <div className="navUtilityBtn">
         <button className="navBtn">
-          <RiNotification4Fill />
+          <Link to="/notifications">
+            <RiNotification4Fill />
+          </Link>
         </button>
-        <button className="navBtn" onClick={() => signOut(auth)}>
+        <button className="navBtn" onClick={handleSignOut}>
           <FaSignOutAlt />
         </button>
       </div>

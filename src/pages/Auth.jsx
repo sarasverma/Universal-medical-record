@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
-// import "./Auth.css";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Logo from "../assets/logo.png";
-import { auth, db } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { auth, db, storage } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../components/Carousel";
 import { toast } from "react-toastify";
-import Wrapper from "./AuthStyle";
+import Wrapper from "./styles/AuthStyle";
+import { AiFillFileImage } from "react-icons/ai";
+import { AuthContext } from "../context/AuthContext";
 
 const Auth = () => {
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
@@ -19,8 +21,17 @@ const Auth = () => {
     name: "",
     email: "",
     password: "",
+    file: null,
   });
+
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, []);
 
   function handleOnFocus(e) {
     e.target.classList.add("active");
@@ -44,6 +55,10 @@ const Auth = () => {
     setRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value });
   };
 
+  const onChangeRegisterFile = (e) => {
+    setRegisterInfo({ ...registerInfo, [e.target.name]: e.target.files[0] });
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -51,7 +66,7 @@ const Auth = () => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-      toast.success(`Welcome back ${user.displayName}`);
+      toast.success(`Welcome back ${user.displayName} 😊`);
       navigate("/");
     } catch (e) {
       toast.error(`Error authenticating user: ${e}`);
@@ -61,27 +76,56 @@ const Auth = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const { name, email, password } = registerInfo;
+    const { name, email, password, file } = registerInfo;
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      // add display name
-      await updateProfile(user, {
-        displayName: name,
-      });
 
-      // storing information in database
-      await setDoc(doc(db, "userRecordInfo", user.uid), {
-        uid: user.uid,
-        name,
-        email,
-      });
+      // store img of user
+      const storageRef = ref(storage, email);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-      toast.success(`Welcome ${user.displayName}`);
-      navigate("/");
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+            .then(async (downloadURL) => {
+              await updateProfile(user, {
+                displayName: name,
+                photoURL: downloadURL,
+              });
+
+              // storing information in database
+              // userInfo
+              await setDoc(doc(db, "userInfo", email), {
+                email,
+                name,
+                photoURL: downloadURL,
+              });
+
+              // userSetting
+              await setDoc(doc(db, "userSetting", email), {
+                email,
+                notification: [],
+                access: [],
+                cids: [],
+              });
+
+              toast.success(`Welcome ${user.displayName} 😊`);
+              navigate("/");
+            })
+            .catch((e) => {
+              toast.error(`Error : ${e}`);
+            });
+        }
+      );
     } catch (e) {
       toast.error(`Error : ${e}`);
     }
@@ -127,7 +171,7 @@ const Auth = () => {
                   <div className="input-wrap">
                     <input
                       type="password"
-                      minLength={4}
+                      minLength={8}
                       name="password"
                       onChange={onChangeLogin}
                       onFocus={handleOnFocus}
@@ -198,7 +242,7 @@ const Auth = () => {
                   <div className="input-wrap">
                     <input
                       type="password"
-                      minLength={4}
+                      minLength={8}
                       name="password"
                       onChange={onChangeRegister}
                       onFocus={handleOnFocus}
@@ -208,6 +252,27 @@ const Auth = () => {
                       required
                     />
                     <label>Password</label>
+                  </div>
+                  <div className="input-wrap">
+                    <input
+                      type="file"
+                      id="file"
+                      name="file"
+                      style={{ display: "none" }}
+                      onChange={onChangeRegisterFile}
+                      required
+                    />
+                    <label
+                      htmlFor="file"
+                      style={{ pointerEvents: "auto", cursor: "pointer" }}
+                    >
+                      <AiFillFileImage />
+                      <span>{`${
+                        registerInfo.file
+                          ? registerInfo.file.name
+                          : "Add a picture"
+                      }`}</span>
+                    </label>
                   </div>
                   <input
                     type="submit"
