@@ -1,6 +1,25 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  background: rgb(8, 8, 122);
+  background: linear-gradient(
+    54deg,
+    rgba(8, 8, 122, 0.7400210084033614) 0%,
+    rgba(8, 148, 245, 1) 48%,
+    rgba(2, 158, 12, 1) 100%
+  );
+  main {
+    width: 100%;
+    min-height: 100dvh;
+    overflow: hidden;
+    // background-color: #ff8c6b;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+  }
+
   .loader {
     width: 100dvw;
     height: 100dvh;
@@ -143,8 +162,11 @@ const Wrapper = styled.div`
     display: inline-block;
     width: 100%;
     height: 43px;
-    background-color: #151111;
-    color: #fff;
+    // background-color: #151111;
+    // color: #fff;
+    background-color: #8371fd;
+
+    // font-weight: 700;
     border: none;
     cursor: pointer;
     border-radius: 0.8rem;
@@ -155,6 +177,7 @@ const Wrapper = styled.div`
 
   .sign-btn:hover {
     background-color: #8371fd;
+    transform: scale(1.1);
   }
 
   .text {
@@ -195,7 +218,14 @@ const Wrapper = styled.div`
     width: 55%;
     left: 45%;
     top: 0;
-    background-color: #ffe0d2;
+    // background-color: #ffe0d2;
+    background: rgb(8, 8, 122);
+    background: linear-gradient(
+      54deg,
+      rgba(8, 8, 122, 0.7400210084033614) 0%,
+      rgba(8, 148, 245, 1) 48%,
+      rgba(2, 158, 12, 1) 100%
+    );
     border-radius: 2rem;
     display: grid;
     grid-template-rows: auto 1fr;
