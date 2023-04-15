@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Searchbar from "../components/SearchBar";
+import Searchbar from "../components/Searchbar";
 import { arrayRemove, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
