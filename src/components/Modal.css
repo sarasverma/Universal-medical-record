@@ -1,0 +1,66 @@
+.modalBackground {
+    width: 100dvw;
+    height: 100dvh;
+    /* background-color: transparent; */
+    background-color: rgba(74, 72, 72, 0.5); 
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+  }
+
+  /* .modalContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  } */
+
+
+  .modalContainer .title {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .titleCloseBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .titleCloseBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  .modalContainer .body {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+  
+
+  @media only screen and (max-width: 700px) {
+    .modalContainer{
+      max-width: 90%;
+    }
+    .modalBackground img{
+      width: 100%;
+    }
+
+    .body div {
+      width: 90%;
+    }
+  }

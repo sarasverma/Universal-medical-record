@@ -62,7 +62,7 @@ const New = () => {
     }
 
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(email);
+    // console.log(email);
     if (email) {
       if (regex.test(email)) {
         setIsLoading(true);

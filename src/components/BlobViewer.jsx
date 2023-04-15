@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PdfView from "./PdfView";
 
 const BlobViewer = ({ blob }) => {
   const [url, setUrl] = useState(null);
@@ -7,7 +8,7 @@ const BlobViewer = ({ blob }) => {
   React.useEffect(() => {
     const objectUrl = URL.createObjectURL(blob);
     setUrl(objectUrl);
-    console.log(blob, objectUrl);
+    // console.log(blob, objectUrl);
 
     // release object URL when the component unmounts
     return () => URL.revokeObjectURL(objectUrl);
@@ -21,7 +22,9 @@ const BlobViewer = ({ blob }) => {
   if (blob.type.startsWith("image/")) {
     return <img src={url} alt="blob" />;
   } else if (blob.type.startsWith("video/")) {
-    return <video src={url} controls />;
+    return <img src={url} alt="blob" />;
+  } else if (blob.type.startsWith("application/pdf")) {
+    return <PdfView blob={blob} />;
   } else {
     return <div>Unsupported blob type: {blob.type}</div>;
   }

@@ -11,11 +11,13 @@ export const Web3ContextProvider = ({ children }) => {
     return cid;
   }
 
-  async function retrieveFile(cid) {
-    const url = `https://dweb.link/ipfs/${cid}`;
+  async function retrieveFile(cid, name) {
+    // const url = `https://dweb.link/ipfs/${cid}`;
     // full url required to access directly
-    // const url = `https://${cid}.ipfs.dweb.link/wb.jpg`;
-    const response = await fetch(url);
+    // const url = `https://${cid}.ipfs.dweb.link/${name}`;
+    const anotherLink = `https://${cid}.ipfs.w3s.link/${name}`;
+    // console.log(url);
+    const response = await fetch(anotherLink);
     // console.log(url);
     const blob = await response.blob();
     return blob;

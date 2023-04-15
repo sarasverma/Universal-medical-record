@@ -13,6 +13,11 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
+body{
+  /* background: rgb(17,8,122);
+background: linear-gradient(54deg, rgba(17,8,122,1) 0%, rgba(8,148,245,1) 48%, rgba(2,158,12,1) 100%); */
+}
+
 main {
     width: 100%;
     min-height: 100dvh;
@@ -22,4 +27,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background: rgb(17,8,122);
+background: linear-gradient(54deg, rgba(17,8,122,1) 0%, rgba(8,148,245,1) 48%, rgba(2,158,12,1) 100%); */
 }

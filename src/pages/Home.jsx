@@ -14,10 +14,13 @@ import Wrapper from "./styles/HomeStyle";
 import { HashLoader } from "react-spinners";
 import { MdAddCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cids, setCids] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalCid, setModalCid] = useState({});
 
   const { currentUser } = useContext(AuthContext);
 
@@ -61,53 +64,66 @@ const Home = () => {
   }, []);
 
   return (
-    <Wrapper>
-      {isLoading ? (
-        <div className="loader">
-          <HashLoader
-            color="#76d636"
-            loading={isLoading}
-            cssOverride=""
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      ) : (
-        <>
-          {cids.length == 0 ? (
-            <div className="empty">
-              <MdAddCircle style={{ fontSize: "100px" }} />
-              <h2>
-                <Link to="/new">Add medical file &gt;</Link>
-              </h2>
-            </div>
-          ) : (
-            <div className="main">
-              <h3 className="heading">Your medical History </h3>
-              <div className="container">
-                <ul>
-                  {cids.map((cid) => (
-                    <li key={cid.cid}>
-                      <h3 className="title">{cid.metaData.diseaseName}</h3>
-                      <div>
-                        <p>👨‍⚕️ Doctor name :- {cid.metaData.doctorName}</p>
-                        <p>🏥 Hospital name :- {cid.metaData.hospitalName}</p>
-                        <p>💊 Medicine :- {cid.metaData.medicinePrescribed}</p>
-                        <p>📅 Recovery date :- {cid.metaData.recoveryDate}</p>
-                      </div>
-                      <a href="#">See medical files &gt;</a>
-                      <span className="circle" />
-                      <span className="date">{cid.metaData.testDate}</span>
-                    </li>
-                  ))}
-                </ul>
+    <>
+      <Wrapper>
+        {isLoading ? (
+          <div className="loader">
+            <HashLoader
+              color="#76d636"
+              loading={isLoading}
+              cssOverride=""
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        ) : (
+          <>
+            {cids.length == 0 ? (
+              <div className="empty">
+                <MdAddCircle style={{ fontSize: "100px" }} />
+                <h2>
+                  <Link to="/new">Add medical file &gt;</Link>
+                </h2>
               </div>
-            </div>
-          )}
-        </>
-      )}
-    </Wrapper>
+            ) : (
+              <div className="main">
+                <h3 className="heading">Your medical History </h3>
+                <div className="container">
+                  <ul>
+                    {cids.map((cid) => (
+                      <li key={cid.cid}>
+                        <h3 className="title">{cid.metaData.diseaseName}</h3>
+                        <div>
+                          <p>👨‍⚕️ Doctor name :- {cid.metaData.doctorName}</p>
+                          <p>🏥 Hospital name :- {cid.metaData.hospitalName}</p>
+                          <p>
+                            💊 Medicine :- {cid.metaData.medicinePrescribed}
+                          </p>
+                          <p>📅 Recovery date :- {cid.metaData.recoveryDate}</p>
+                        </div>
+                        <a
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            setModalCid({ cid: cid.cid, name: cid.name });
+                            setModalOpen(true);
+                          }}
+                        >
+                          See medical file &gt;
+                        </a>
+                        <span className="circle" />
+                        <span className="date">{cid.metaData.testDate}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </Wrapper>
+      {modalOpen && <Modal setOpenModal={setModalOpen} cidInfo={modalCid} />}
+    </>
   );
 };
 

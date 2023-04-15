@@ -42,11 +42,11 @@ function Navbar() {
         <Link to="/new" onClick={closeNavbar}>
           New
         </Link>
+        <Link to="/access" onClick={closeNavbar}>
+          Access
+        </Link>
         <Link to="/account" onClick={closeNavbar}>
           Account
-        </Link>
-        <Link to="/search" onClick={closeNavbar}>
-          Search
         </Link>
         <button id="navCloseBtn" onClick={closeNavbar}>
           <FaTimes />

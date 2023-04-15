@@ -3,7 +3,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
-import Test from "./pages/Test";
 import Account from "./pages/Account";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
@@ -11,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import New from "./pages/New";
-import Search from "./pages/Search";
+import Access from "./pages/Access";
 import Notification from "./pages/Notification";
 
 function App() {
@@ -63,10 +62,10 @@ function App() {
             }
           />
           <Route
-            path="/search"
+            path="/Access"
             element={
               <ProtectedRoute>
-                <Search />
+                <Access />
               </ProtectedRoute>
             }
           />
@@ -79,7 +78,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/test" element={<Test />} />
         </Routes>
       </BrowserRouter>
 
