@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  .loader {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .box {
     position: relative;
     width: 100%;

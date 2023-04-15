@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { RiNotificationOffFill } from "react-icons/ri";
 import { AuthContext } from "../context/AuthContext";
-import { Wrapper1, Wrapper2 } from "./styles/Notification";
+import { Wrapper1, Wrapper2 } from "./styles/NotificationStyle";
 import { toast } from "react-toastify";
 import {
   arrayRemove,
@@ -34,12 +34,18 @@ const Notification = () => {
   }, []);
 
   const handleAccept = async (email) => {
-    console.log("accept");
+    // console.log("accept");
     try {
+      // add to your access list
       await updateDoc(doc(db, "userSetting", currentUser.email), {
         notification: arrayRemove(email),
         access: arrayUnion(email),
       });
+      // add to permission list of other user
+      await updateDoc(doc(db, "userSetting", email), {
+        permission: arrayUnion(currentUser.email),
+      });
+
       const newNotifications = notifications.filter(
         (notification) => notification !== email
       );
@@ -51,8 +57,9 @@ const Notification = () => {
   };
 
   const handleReject = async (email) => {
-    console.log("reject");
+    // console.log("reject");
     try {
+      // remove from notification list
       await updateDoc(doc(db, "userSetting", currentUser.email), {
         notification: arrayRemove(email),
       });

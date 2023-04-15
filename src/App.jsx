@@ -11,12 +11,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import New from "./pages/New";
-import Search from "./components/Search";
+import Search from "./pages/Search";
 import Notification from "./pages/Notification";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
-  // console.log(currentUser);
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -63,8 +62,24 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Search />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/new/:email/"
+            element={
+              <ProtectedRoute>
+                <New />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/test" element={<Test />} />
-          <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>
 

@@ -37,7 +37,7 @@ function Navbar() {
       </div>
       <nav ref={navRef}>
         <Link to="/" onClick={closeNavbar}>
-          Home
+          My History
         </Link>
         <Link to="/new" onClick={closeNavbar}>
           New
@@ -45,8 +45,8 @@ function Navbar() {
         <Link to="/account" onClick={closeNavbar}>
           Account
         </Link>
-        <Link to="/setting" onClick={closeNavbar}>
-          Setting
+        <Link to="/search" onClick={closeNavbar}>
+          Search
         </Link>
         <button id="navCloseBtn" onClick={closeNavbar}>
           <FaTimes />

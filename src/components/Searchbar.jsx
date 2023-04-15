@@ -4,8 +4,9 @@ import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import "./Search.css";
+import { BsSearch } from "react-icons/bs";
 
-const Search = () => {
+const Searchbar = () => {
   const [userEmail, setUserEmail] = useState("");
 
   const { currentUser } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const Search = () => {
 
       const res = await getDoc(doc(db, "userSetting", userEmail));
       if (res.exists()) {
-        console.log(res.data());
+        // console.log(res.data());
 
         await updateDoc(doc(db, "userSetting", userEmail), {
           notification: arrayUnion(currentUser.email),
@@ -36,19 +37,23 @@ const Search = () => {
   };
 
   return (
-    <div className="search">
-      <form className="searchForm" onSubmit={handleSearch}>
-        <input
-          type="email"
-          placeholder="Find a user"
-          onChange={(e) => setUserEmail(e.target.value)}
-          value={userEmail}
-          required
-        />
-        <button type="submit">search</button>
-      </form>
-    </div>
+    <>
+      <div className="search">
+        <form className="searchForm" onSubmit={handleSearch}>
+          <input
+            type="email"
+            placeholder="Find a user"
+            onChange={(e) => setUserEmail(e.target.value)}
+            value={userEmail}
+            required
+          />
+          <button type="submit">
+            <BsSearch />
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
-export default Search;
+export default Searchbar;
