@@ -62,7 +62,7 @@ In addition, the Universal Medical Record System makes it easier for doctors to 
   
   * AMD instances:- Our project Universal Medical Record has been deployed on the AMD Virtual Machine instance combining the powerful capabilities of AMD virtual machine running on the Google Cloud Platform.
   
-  * Web3
+  * Web3 - for prescription uploaded on web3 storage which is built on top of ips and blockchain and our prescriptions metadata is stored on firebase
 
 ## Project Implementation : 
 Here's our [project demonstration](https://www.makeareadme.com/) on youtube
