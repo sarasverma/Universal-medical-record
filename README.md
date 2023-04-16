@@ -110,3 +110,9 @@ Here's our [project demonstration](https://www.makeareadme.com/) on youtube
 The key advantage of the Universal Medical Record System is its ability to provide a convenient, efficient, personalized, and secure solution for medical record management, while also contributing to a healthier planet by reducing paper waste.
 
 This digital platform streamlines communication between patients and doctors, improving the quality of care received, and eliminates the need for physical paper records, reducing the environmental impact of medical record management.
+
+By SOLVING FOR INDIA, the Universal Medical Record System helps to ensure that every Indian at the risk of or suffering from medical conditions has access to the appropriate care and treatment, enabling them to lead a better quality of life.
+
+
+
+
