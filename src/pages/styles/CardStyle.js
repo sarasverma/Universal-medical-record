@@ -33,7 +33,7 @@ const Wrapper = styled.div`
     transition: transform 200ms ease-in;
   }
   .card__image {
-    height: 12rem;
+    height: 7rem;
     width: 100%;
     object-fit: cover;
   }
@@ -58,6 +58,8 @@ const Wrapper = styled.div`
   .card__btn.add {
     color: green;
     border-color: green;
+    padding: 8px;
+    margin: 6px 1rem;
   }
 
   .card:hover {

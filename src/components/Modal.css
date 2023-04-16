@@ -33,6 +33,7 @@
   .titleCloseBtn {
     display: flex;
     justify-content: flex-end;
+    margin-right: 20px;
   }
 
   .titleCloseBtn button {
@@ -49,6 +50,11 @@
     align-items: center;
     font-size: 1.7rem;
     text-align: center;
+  }
+
+  .modalBackground img{
+    max-height: 83dvh;
+    max-width: 90%;
   }
   
 

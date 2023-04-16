@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import Wrapper from "./styles/HomeStyle";
 import { HashLoader } from "react-spinners";
 import { MdAddCircle } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Modal from "../components/Modal";
 
 const Home = () => {
@@ -22,14 +22,58 @@ const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalCid, setModalCid] = useState({});
 
+  const [checkSlug, setCheckSlug] = useState(false);
+
+  const { email } = useParams(); // for getting email slug
+  const navigate = useNavigate();
+
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
+    async function validateAccess() {
+      try {
+        // check whether current user is in the access list of email
+        const res = await getDoc(doc(db, "userSetting", email));
+        if (res.exists()) {
+          const data = res.data();
+          const accessList = data.access;
+          if (accessList.includes(currentUser.email)) {
+            setCheckSlug(true);
+            return true;
+          } else {
+            toast.error("Access denied");
+            navigate("/");
+          }
+        } else {
+          toast.error("URL doesn't exist");
+          navigate("/");
+        }
+      } catch (e) {
+        return false;
+        toast.error(e);
+      }
+    }
+
     async function getData() {
       try {
         setIsLoading(true);
 
-        const res = await getDoc(doc(db, "userSetting", currentUser.email));
+        // console.log(email);
+        let condition = false;
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email) {
+          if (regex.test(email)) {
+            condition = await validateAccess();
+          } else {
+            toast.error("URL does't exist");
+            navigate("/");
+          }
+        }
+
+        // console.log(condition);
+        const user = condition ? email : currentUser.email;
+
+        const res = await getDoc(doc(db, "userSetting", user));
         if (res.exists()) {
           const cidList = res.data().cids;
 
@@ -45,7 +89,7 @@ const Home = () => {
 
           cidMetaList.sort(
             (a, b) =>
-              new Date(a.metaData.testDate) - new Date(b.metaData.testDate)
+              new Date(b.metaData.testDate) - new Date(a.metaData.testDate)
           );
           // console.log(cidMetaList);
           setCids(cidMetaList);
@@ -88,7 +132,9 @@ const Home = () => {
               </div>
             ) : (
               <div className="main">
-                <h3 className="heading">Your medical History </h3>
+                <h3 className="heading">
+                  {`${checkSlug && email ? email : "Your"} medical History`}{" "}
+                </h3>
                 <div className="container">
                   <ul>
                     {cids.map((cid) => (

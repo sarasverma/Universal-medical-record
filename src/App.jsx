@@ -62,7 +62,7 @@ function App() {
             }
           />
           <Route
-            path="/Access"
+            path="/access"
             element={
               <ProtectedRoute>
                 <Access />
@@ -75,6 +75,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <New />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/history/:email/"
+            element={
+              <ProtectedRoute>
+                <Home />
               </ProtectedRoute>
             }
           />

@@ -20,7 +20,7 @@ const Modal = ({ setOpenModal, cidInfo }) => {
 
         setBlob(blob);
         setIsLoading(false);
-        blob && console.log(blob.type.startsWith("application/pdf"));
+        // blob && console.log(blob.type.startsWith("application/pdf"));
       } catch (e) {
         setIsLoading(false);
         toast.error(e);

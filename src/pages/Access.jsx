@@ -99,6 +99,9 @@ const Search = () => {
                       />
                       <h2 className="card__title">{email}</h2>
                     </div>
+                    <Link to={`/history/${email}/`} className="card__btn add">
+                      See medical history
+                    </Link>
                     <Link to={`/new/${email}/`} className="card__btn add">
                       Add record
                     </Link>

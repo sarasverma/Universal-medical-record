@@ -36,6 +36,7 @@ const Wrapper = styled.div`
     color: rgb(106, 6, 236);
     position: relative;
     margin-bottom: 80px;
+    text-align: center;
   }
   .heading::after {
     content: " ";
