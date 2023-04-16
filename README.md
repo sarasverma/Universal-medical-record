@@ -81,32 +81,55 @@ Here's our [project demonstration](https://www.makeareadme.com/) on youtube
 
 
 
-
 2. Account Page of the User - Patient / Doctor.
+
+* Patient Account: 
 
 ![3](https://user-images.githubusercontent.com/114461220/232309614-aefdc160-ddef-47d4-a2a4-adef6bdfdc7e.png)
 
 
+* Doctor Account:
+
+![4](https://user-images.githubusercontent.com/114461220/232321942-d83ea0a4-44d6-4820-a977-9f5bd6a8a3fe.png)
 
 
-3. Access page where Doctors can send the access request to patients.
+
+3. Access page where Doctors can access the patient. Patient can also see who is Accessing them
+
+* Notification page where patient can accept the doctors access request.
+
+![5](https://user-images.githubusercontent.com/114461220/232322138-03212317-8f6e-470f-94b1-49d9bc22697c.png)
 
 
+* Patient can see who is accessing them:
+
+![6](https://user-images.githubusercontent.com/114461220/232322198-77efe62c-6ae0-45d0-8ec8-18333157013f.png)
 
 
 
 4. Add Record page where user can add the medical details, precriptions etc.
 
 
+![8](https://user-images.githubusercontent.com/114461220/232322391-94639a32-3e66-4ec7-aee3-2e25c48fe2a7.png)
+
 
 
 5. Analysis / History page where user can see his full medical hsitory with details
 
 
+* Patient can see their medical histroy:
+
+![9](https://user-images.githubusercontent.com/114461220/232322483-bd253be8-173e-4f75-9d54-f70419c1ae85.png)
 
 
-6. Notification page where patient can accept the doctors access request.
+* Doctor can see the medical record of the patient and can also add the record of the patient:
 
+![7](https://user-images.githubusercontent.com/114461220/232322299-1ff37433-49e8-4e5f-af9e-ff1ac32cb322.png)
+
+
+* Doctors can see their patient's Medical history:
+
+![10](https://user-images.githubusercontent.com/114461220/232322551-c2541431-a7dd-4604-8961-17faee2fe6b0.png)
 
 
 ## Key Advantages of the "Universal Medical Record System"
