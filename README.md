@@ -8,6 +8,7 @@ The Universal Medical Record System is a revolutionary digital platform designed
 This innovative system has been designed with security and privacy in mind, utilizing advanced encryption and access controls to prevent unauthorized access to sensitive medical information. The Universal Medical Record System is also environmentally friendly, as it eliminates the need for paper-based record systems, thus reducing paper waste. Overall, this digital solution is a game-changer in medical record management, providing a convenient, secure, and efficient platform for patients and healthcare providers to access and manage medical records, improving patient outcomes, and reducing the risk of medical errors.
 ## The Problem :
 Keeping track of medical records can be challenging for patients with complex medical histories or those who see multiple doctors. Physical copies can get lost or damaged, leading to confusion and potential errors. Patients may also forget important details about their medical history or medications. Accessing medical records can be difficult when seeing a new doctor or receiving care while traveling, which can lead to delays in treatment and potential health risks.
+
 Overall, the lack of a centralized, secure system for medical record management creates unnecessary stress and can negatively impact patient outcomes.
 
 ## Our Solution :
