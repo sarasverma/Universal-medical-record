@@ -54,13 +54,15 @@ In addition, the Universal Medical Record System makes it easier for doctors to 
 
 ### Frontend : 
 
-  * HTML and CSS:- Used to create a visually appealing webpage and add styling, layout and control the look and feel of the website.
-  
+  * React- Used to create a visually appealing webpage and add styling, layout and control the look and feel of the website. 
   
 ### Backend :
   
   * Google Cloud:- We have made use of the Google Cloud's flexible data storage system in order to store the generated diagnosis reports as it offers safe and secure storage systems with easy file retrieval mechanism.
+  
   * AMD instances:- Our project Universal Medical Record has been deployed on the AMD Virtual Machine instance combining the powerful capabilities of AMD virtual machine running on the Google Cloud Platform.
+  
+  * Web3
 
 ## Project Implementation : 
 Here's our [project demonstration](https://www.makeareadme.com/) on youtube
