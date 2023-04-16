@@ -62,12 +62,13 @@ In addition, the Universal Medical Record System makes it easier for doctors to 
   ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
 
 ### Backend :
+  * Firebase - Google Firebase is used for authentication and storing metadata of the users.
   
-  * Google Cloud:- We have made use of the Google Cloud's flexible data storage system in order to store the generated diagnosis reports as it offers safe and secure storage systems with easy file retrieval mechanism.
+  * Web3Storage - It is used for storing the medical files on web3 storage which is built on top of ipfs and filecoin which is decentralized and highly available.
   
-  * AMD instances:- Our project Universal Medical Record has been deployed on the AMD Virtual Machine instance combining the powerful capabilities of AMD virtual machine running on the Google Cloud Platform.
+  * Google cloud platform & AMD instances:- Our project Universal Medical Record has been deployed on the AMD Virtual Machine instance combining the powerful capabilities of AMD virtual machine running on the Google Cloud Platform.
   
-  * Web3 - for prescription upload on web3 storage which is built on top of ips and blockchain and our prescriptions metadata is stored on firebase
+  
 
 ## Project Implementation : 
 Here's our [project demonstration](https://www.youtube.com/watch?v=rS0AT7z5XFo) on youtube and live site on [GoogleCloud AMD instance](http://34.131.143.183/), [Netlify](https://universalmedicalrecord.netlify.app)
