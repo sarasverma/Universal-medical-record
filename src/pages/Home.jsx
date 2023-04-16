@@ -105,7 +105,7 @@ const Home = () => {
     }
 
     getData();
-  }, []);
+  }, [email]);
 
   return (
     <>

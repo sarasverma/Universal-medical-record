@@ -41,6 +41,7 @@ const New = () => {
   useEffect(() => {
     async function getData() {
       try {
+        console.log(email, currentUser.email);
         // check whether current user is in the access list of email
         const res = await getDoc(doc(db, "userSetting", email));
         if (res.exists()) {
@@ -73,7 +74,7 @@ const New = () => {
         navigate("/");
       }
     }
-  }, []);
+  }, [email, checkSlug]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -91,7 +92,7 @@ const New = () => {
       const cid = await uploadFile(medicalFile);
 
       // update for patient
-      const patient = checkSlug ? email : currentUser.email;
+      const patient = email && checkSlug ? email : currentUser.email;
       await updateDoc(doc(db, "userSetting", patient), {
         cids: arrayUnion(cid),
       });
@@ -145,7 +146,8 @@ const New = () => {
               New Details <AiFillFileAdd />
             </div>
             <span style={{ textAlign: "center" }}>
-              {checkSlug ? email : currentUser.email}
+              {console.log(email, checkSlug)}
+              {email && checkSlug ? email : currentUser.email}
             </span>
           </header>
           <form onSubmit={handleSubmit}>
