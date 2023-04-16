@@ -214,7 +214,7 @@ const Account = () => {
                   </div>
                 </div>
                 <button className="nextbtn" type="submit">
-                  <span className="btnText">Change</span>
+                  <span className="btnText">Update</span>
                 </button>
               </div>
             </form>

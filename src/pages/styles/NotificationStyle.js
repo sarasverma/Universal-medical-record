@@ -24,6 +24,7 @@ export const Wrapper2 = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+    flex: 1;
   }
 
   button {

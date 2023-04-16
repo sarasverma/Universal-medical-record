@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import New from "./pages/New";
 import Access from "./pages/Access";
 import Notification from "./pages/Notification";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -87,6 +88,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
 

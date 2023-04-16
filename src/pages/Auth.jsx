@@ -126,8 +126,10 @@ const Auth = () => {
               });
 
               setIsLoading(false);
-              toast.success(`Welcome ${user.displayName} 😊`);
-              navigate("/");
+              toast.success(
+                `Welcome ${user.displayName} 😊. Update your profile`
+              );
+              navigate("/account");
             })
             .catch((e) => {
               setIsLoading(false);

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { RiNotificationOffFill } from "react-icons/ri";
 import { AuthContext } from "../context/AuthContext";
 import { Wrapper1, Wrapper2 } from "./styles/NotificationStyle";
+import Wrapper from "./styles/CardStyle";
 import { toast } from "react-toastify";
 import {
   arrayRemove,
@@ -11,6 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { FaUserAlt } from "react-icons/fa";
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -76,35 +78,59 @@ const Notification = () => {
 
   return (
     <Wrapper2>
-      {notifications.length === 0 ? (
-        <Wrapper1>
-          <RiNotificationOffFill style={{ fontSize: "100px" }} />
-          <h2>No notification</h2>
-        </Wrapper1>
-      ) : (
-        <>
-          <h1>Access requests</h1>
-          {notifications.map((email) => {
-            return (
-              <div className="notificationCard" key={email}>
-                <h3>{email}</h3>
-                <button
-                  className="notificationAccept"
-                  onClick={() => handleAccept(email)}
+      <Wrapper>
+        {notifications.length === 0 ? (
+          <Wrapper1>
+            <RiNotificationOffFill style={{ fontSize: "100px" }} />
+            <h2>No notification</h2>
+          </Wrapper1>
+        ) : (
+          <>
+            <h1>Access requests</h1>
+            {notifications.map((email) => {
+              return (
+                <div
+                  className="card"
+                  key={email}
+                  style={{ marginTop: "20px", padding: "10px 0" }}
                 >
-                  ✅
-                </button>
-                <button
-                  className="notificationReject"
-                  onClick={() => handleReject(email)}
-                >
-                  ❌
-                </button>
-              </div>
-            );
-          })}
-        </>
-      )}
+                  <div className="card__body">
+                    <FaUserAlt
+                      className="card__image"
+                      style={{ color: "grey" }}
+                    />
+                    <h2 className="card__title">{email}</h2>
+                  </div>
+
+                  <div
+                    className="buttons"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      className="notificationAccept"
+                      onClick={() => handleAccept(email)}
+                      style={{ fontSize: "32px" }}
+                    >
+                      ✅
+                    </button>
+                    <button
+                      className="notificationReject"
+                      onClick={() => handleReject(email)}
+                      style={{ fontSize: "32px" }}
+                    >
+                      ❌
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
+      </Wrapper>
     </Wrapper2>
   );
 };

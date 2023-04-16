@@ -1,0 +1,17 @@
+div{
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.notFound{
+    color: red;
+    text-align: center;
+}
+
+p{
+    font-size: 30px;
+}
